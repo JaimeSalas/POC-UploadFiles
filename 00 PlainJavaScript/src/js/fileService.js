@@ -1,6 +1,6 @@
 api.fileService = (function () {
-  // const baseUrl = `http://localhost:8000/api/files`;
-  const baseUrl = `http://localhost:8000/upload`;
+  const baseUrl = `http://localhost:8000/api/files`;
+  //const baseUrl = `http://localhost:8000/upload`;
   const uploadFile = function uploadFile(files) {
     // input type="file", pass as well related user.
     // https://developer.mozilla.org/es/docs/XMLHttpRequest/Using_XMLHttpRequest

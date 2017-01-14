@@ -11,11 +11,10 @@ const routes = function () {
       console.log(req);
       let form = new formidable.IncomingForm();
       form.multiples = true;
-      form.uploadDir = path.join(__dirname, '/uploads');
+      form.uploadDir = path.join(__dirname, '../uploads');
 
       form.on('file', function(field, file) {
-        // TODO: Get metadata associated with file.
-        console.log(field);
+        fs.rename(file.path, path.join(form.uploadDir, file.name));
       });
 
       form.on('error', function(err) {
@@ -28,6 +27,7 @@ const routes = function () {
 
       form.parse(req);
     });
+
 
   return fileRouter;
 };
