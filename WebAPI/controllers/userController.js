@@ -17,6 +17,7 @@ const userController = function(User) {
       if (err) {
         res.status(500).send(err);
       } else {
+        console.log(users);
         res.json(users);
       }
     });

@@ -9,6 +9,6 @@ const routes = function(User) {
   // TODO: Use middleware to insert files.
 
   return userRouter;
-}
+};
 
 module.exports = routes;

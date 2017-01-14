@@ -3,4 +3,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
   api.userService.getUsers()
     .then(result => console.log(result))
     .catch(err => console.log(err));
+
+  const uploadButton = document.getElementById('uploadButton');
+  uploadButton.addEventListener('click', (event) => {
+    const filesInput = document.getElementById('uploadfile');
+    // console.log(file.files);
+    api.fileService.uploadFile(filesInput.files)
+      .then(result => {
+        console.log(result);
+      }).catch(err => {
+        console.log(err);
+      })
+  });
 });
