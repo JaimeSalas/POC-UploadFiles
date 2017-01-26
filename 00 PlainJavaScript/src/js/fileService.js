@@ -10,7 +10,7 @@ api.fileService = (function () {
     // formidable do not use extra headers.
 
     // TODO: Use user id. Select from table.
-    formData.append('userId', '5888fbc3ca10712d7c18e673'); // Ensure that userId exists on database.
+    formData.append('userId', '5888fbc8ca10712d7c18e674'); // Ensure that userId exists on database.
     let promise = new Promise(function(resolve, reject) {
       const client = new XMLHttpRequest();
       client.onerror = (event) => {
