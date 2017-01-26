@@ -17,7 +17,9 @@ const should = require('should'),
           .send(userPost)
           .expect(201)
           .end(function (err, results) {
-            // results.body.should.have.property('_id');
+            //console.log(results);
+            console.log(err);
+            //results.body.should.have.property('_id');
             // console.log(err);
             done();
           });

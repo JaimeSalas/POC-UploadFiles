@@ -7,8 +7,8 @@ const express = require('express'),
       path = require('path'),
       formidable = require('formidable'),
       fs = require('fs');
-
-// TODO: Add package for uploading files
+// TODO: http://stackoverflow.com/questions/39333229/mpromise-mongooses-default-promise-library-is-deprecated-error-when-testing
+// TODO: Add bluebird
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -25,7 +25,7 @@ const User = require('./models/userModel');
 const userRouter = require('./Routes/userRoutes')(User);
 app.use('/api/users', userRouter);
 
-const fileRouter = require('./Routes/fileRoutes')();
+const fileRouter = require('./Routes/fileRoutes')(User);
 app.use('/api/files', fileRouter);
 
 app.get('/', (req, res) => res.send('API base root'));

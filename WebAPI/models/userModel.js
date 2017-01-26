@@ -10,7 +10,7 @@ var userModel = new Schema({
   },
   files:[{
     name: String,
-    root: String,
+    //type: String, // Conatins /, not allowed character
     size: Number
   }]
 });
