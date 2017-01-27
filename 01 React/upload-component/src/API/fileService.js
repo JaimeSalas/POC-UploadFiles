@@ -8,9 +8,9 @@ class FileService {
   static uploadFile(file, callback) { // Pass a callback to grab progress
     const formData = new FormData();
     formData.append('upload', file);
-    formData.append('userId', '5888fbbeca10712d7c18e672'); // Ensure valid _id
-
-    let promise = new Promise((resolve, reject) => {
+    formData.append('userId', '5888fbc8ca10712d7c18e674'); // Ensure valid _id
+    const self = this;
+    let promise = new Promise(function(resolve, reject) {
       const client = new XMLHttpRequest();
 
       client.onerror = (event) => {
@@ -20,16 +20,16 @@ class FileService {
 
       client.onreadystatechange = (event) => {
         // TODO: Grab progess and expose on callback
-        if (client.readystate === 4) {
+        if (client.readyState === 4) {
           resolve('upload completed');
-        }
-
-        if (callback && client.readystate !== 4) {
-          callback(event);
         }
       };
 
-      client.open('post', this.baseUrl);
+      client.upload.onprogress = (event) => {
+        callback(event);
+      };
+
+      client.open('post', self.baseUrl);
       client.send(formData);
     });
 

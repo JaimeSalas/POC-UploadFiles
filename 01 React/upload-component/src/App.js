@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import FileService from './API/fileService';
+import InputFile from './components/InputFile';
 
-// TODO: Create element to display users
-// TODO: Create state-less component to upload file
+// TODO: Create state-less component to display users
+// TODO: Create state-less component to display upload
+// TODO: Use this style: http://callmenick.com/_development/input-text-styles/
 class App extends Component {
   constructor(props) {
     super(props);
@@ -18,23 +19,23 @@ class App extends Component {
     // TODO: Expose multi file selection as property.
     this.state = {
       file: null,
-      uploadingFile: false
+      uploadingFile: false,
+      uploadPercentage: ''
     };
   }
 
   onUpload(evt) {
     evt.stopPropagation();
-    // TODO: Try to grab progress, and update state.
     this.setState({uploadingFile:true});
     FileService.uploadFile(this.state.file, this.onUploadProgress)
       .then((result) => {
-        console.log(result);
+        setTimeout(() => {
+          this.setState({uploadingFile:false});
+        }, 1000);
       }).catch((err) => {
         console.log(err);
-      }).finally(
-        () => this.setState({uploadingFile:false})
-      );
-
+        this.setState({uploadingFile:false});
+      });
   }
 
   onChangeFileSelection(evt) {
@@ -48,24 +49,31 @@ class App extends Component {
   }
 
   onUploadProgress(event) {
-    console.log(event);
+    // More info: http://stackoverflow.com/questions/7381883/xmlhttprequest-a-problem-with-event-loaded-and-event-total-values
+    if (event.lengthComputable) {
+      let uploadFilePercentage = Math.floor((event.loaded * 100)/event.total);
+      this.setState({uploadPercentage:uploadFilePercentage});
+    }
   }
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h2>Upload Files</h2>
-
-        <input type="file" name="uploafile"
-        onChange={this.onChangeFileSelection}
-        onClick={this.onClickFileSelection}/>
-        <input type="button" value="uploadButton" onClick={this.onUpload} />
-
-
+        <InputFile
+          onClickFileSelection={this.onClickFileSelection}
+          onChangeFileSelection={this.onChangeFileSelection}
+          onUpload={this.onUpload}/>
+        {
+          this.state.uploadingFile &&
+          <div className="display-progress">
+            <label>Progress:</label>
+            <span>{this.state.uploadPercentage}</span>
+          </div>
+        }
       </div>
     );
   }
 }
 
-// TODO: Create state less component to upload document.
 export default App;
