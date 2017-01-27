@@ -5,7 +5,8 @@ api.fileService = (function () {
     // input type="file", pass as well related user.
     // https://developer.mozilla.org/es/docs/XMLHttpRequest/Using_XMLHttpRequest
     const formData = new FormData();
-    formData.append('upload', files[0]); // TODO: Enable multiple files upload. Create validations for file type.
+    formData.append('upload', files[0]); 
+    // TODO: Enable multiple files upload. Create validations for file type.
     //NOTE: http://stackoverflow.com/questions/6884382/node-js-formidable-upload-with-xhr
     // formidable do not use extra headers.
 
