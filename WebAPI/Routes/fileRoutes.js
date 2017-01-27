@@ -39,7 +39,7 @@ const routes = function (User) {
 
       form.on('end', function() {
         User.findById(userFile.userId, function(err, doc) {
-          console.log(doc);
+          console.log(userFile);
           doc.files.push({
             name: userFile.fileName.toString(),
             //type: userFile.fileType.toString(),
@@ -52,7 +52,6 @@ const routes = function (User) {
 
       form.parse(req);
     });
-
 
   return fileRouter;
 };
