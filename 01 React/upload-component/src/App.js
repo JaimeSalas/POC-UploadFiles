@@ -17,6 +17,9 @@ class App extends Component {
 
     // TODO: Study how to allow multiple files selection.
     // TODO: Expose multi file selection as property.
+    // TODO: Use componentWillMount to load user data.
+    // TODO: Read this -> https://facebook.github.io/react/docs/state-and-lifecycle.html
+    // More info: http://andrewhfarmer.com/react-ajax-best-practices/
     this.state = {
       file: null,
       uploadingFile: false,

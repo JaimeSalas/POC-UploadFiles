@@ -5,7 +5,7 @@ class FileService {
     this.baseUrl = baseUrl;
   }
 
-  static uploadFile(file, callback) { // Pass a callback to grab progress
+  static uploadFile(file, callback) {
     const formData = new FormData();
     formData.append('upload', file);
     formData.append('userId', '5888fbc8ca10712d7c18e674'); // Ensure valid _id
@@ -19,7 +19,6 @@ class FileService {
       };
 
       client.onreadystatechange = (event) => {
-        // TODO: Grab progess and expose on callback
         if (client.readyState === 4) {
           resolve('upload completed');
         }
