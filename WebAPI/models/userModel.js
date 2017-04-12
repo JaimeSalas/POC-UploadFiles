@@ -10,7 +10,7 @@ var userModel = new Schema({
   },
   files:[{
     name: String,
-    //type: String, // Conatins /, not allowed character
+    //type: String, // Contains /, not allowed character
     size: Number
   }]
 });

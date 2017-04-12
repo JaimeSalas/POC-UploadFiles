@@ -12,7 +12,7 @@ const express = require('express'),
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-
+// Useless???
 var db;
 
 if(process.env.ENV === 'Test') {

@@ -13,11 +13,16 @@ const userController = function(User) {
   };
 
   const get = (req, res) => {
+    // let query = {}; // Here comes the query string.
+    
+    // if (req.query.genre) {
+    //   query.genre = req.query.genre;
+    // }
+
     User.find({}, function(err, users) {
       if (err) {
         res.status(500).send(err);
       } else {
-        console.log(users);
         res.json(users);
       }
     });

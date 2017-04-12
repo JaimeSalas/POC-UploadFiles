@@ -5,6 +5,13 @@ const express = require('express'),
       fs = require('fs');
 
 // TODO: Discuss use upload/download on uri
+// TODO: Get File by _id
+// TODO: Delete File by _id
+/*
+  To delete a single file, we have to pass two parameters: user._id
+  and file._id. We have to create a query string that comes with 
+  both parameters. userId and fileId
+*/
 const routes = function (User) {
   fileRouter.route('/')
     .post((req, res) => {
@@ -49,8 +56,23 @@ const routes = function (User) {
           res.end('success');
         });
       });
-
+      // TODO: Use callback on parse and onParts.
       form.parse(req);
+    })
+    .get((req, res) => {
+      let query = {};
+
+      if(req.query.fileId) {
+        query.files._id = req.query.fileId;
+      }
+
+      User.find(query, function(err, users) {
+        if(err) {
+          res.status(500).send(err);
+        } else {
+          res.json(users);
+        }
+      });
     });
 
 
