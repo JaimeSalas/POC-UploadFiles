@@ -11,6 +11,21 @@ const express = require('express'),
   To delete a single file, we have to pass two parameters: user._id
   and file._id. We have to create a query string that comes with 
   both parameters. userId and fileId
+ 
+  On client:
+  // Delete a user
+  var url = "http://localhost:8080/api/v1/users";
+  var xhr = new XMLHttpRequest();
+  xhr.open("DELETE", url+'/12', true);
+  xhr.onload = function () {
+    var users = JSON.parse(xhr.responseText);
+    if (xhr.readyState == 4 && xhr.status == "200") {
+      console.table(users);
+    } else {
+      console.error(users);
+    }
+  }
+  xhr.send(null);
 */
 const routes = function (User) {
   fileRouter.route('/')
