@@ -3,6 +3,7 @@ const express = require('express'),
       app = express(),
       port = process.env.PORT || 3000,
       mongoose = require('mongoose'),
+      bluebird = require('bluebird'),
       bodyParser = require('body-parser'),
       path = require('path'),
       formidable = require('formidable'),
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 // Useless???
 var db;
+mongoose.Promise = bluebird;
 
 if(process.env.ENV === 'Test') {
   db = mongoose.connect('mongodb://localhost/userAPI_test'); // Our database is going to connect here in tests environment

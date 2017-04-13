@@ -60,7 +60,6 @@ const routes = function (User) {
 
       form.on('end', function() {
         User.findById(userFile.userId, function(err, doc) {
-          console.log(doc);
           doc.files.push({
             name: userFile.fileName.toString(),
             //type: userFile.fileType.toString(),
@@ -76,27 +75,43 @@ const routes = function (User) {
     .get((req, res) => { // For download file
       // localhost:8000/api/files?userId=5888fbbeca10712d7c18e672&fileId=588ba74ac05ac5126ce1d0f0
       // TODO: Move to middleware. 
-      let query = {};
+      // TODO: Download file.
+      const query = getQueryParams(req);
 
-      if(req.query.userId && req.query.fileId) {
-        query = {
-          id: req.query.userId,
-          file: { id: req.query.fileId }
-        }
-      }
-     
-      User.findById(query.id, function (err, user){
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          const file = user.files.id(query.file.id); //.id(req.file.id);
-          res.json(file);
-        }
-      });
+      User.findById(query.id)
+        .exec()
+        .then(user => res.json(user.files.id(query.file.id)))
+        .catch(err => res.status(500).send(err));
+    })
+    .delete((req, res) => {  
+      const query = getQueryParams(req);
+
+      User.findById(query.id)
+      .exec()
+      .then(user => {
+        user.files.id(query.file.id).remove();
+        user.save(); 
+        return res.status(200).send('OK'); 
+      })
+      .catch(err => res.status(500).send(err));
     });
 
-
   return fileRouter;
+};
+
+// TODO: Move to middleware
+// TODO: Create specific route???
+const getQueryParams = (req) => {
+  let query = null;
+
+  if(req.query.userId && req.query.fileId) {
+    query = {
+      id: req.query.userId,
+      file: { id: req.query.fileId }
+    }
+  }
+
+  return query;
 };
 
 module.exports = routes;
