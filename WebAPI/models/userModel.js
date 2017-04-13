@@ -1,5 +1,6 @@
 const mongoose = require('mongoose'),
-      Schema = mongoose.Schema;
+      Schema = mongoose.Schema,
+      fileModel = require('./fileModel.js');
 
 var userModel = new Schema({
   name: {
@@ -8,11 +9,7 @@ var userModel = new Schema({
   lastName: {
     type: String
   },
-  files:[{
-    name: String,
-    //type: String, // Contains /, not allowed character
-    size: Number
-  }]
+  files:[fileModel]
 });
 
 module.exports = mongoose.model('User', userModel);

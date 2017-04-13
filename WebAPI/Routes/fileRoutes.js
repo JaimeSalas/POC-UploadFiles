@@ -5,7 +5,6 @@ const express = require('express'),
       fs = require('fs');
 
 // TODO: Discuss use upload/download on uri
-// TODO: Get File by _id
 // TODO: Delete File by _id
 /*
   To delete a single file, we have to pass two parameters: user._id
@@ -74,18 +73,24 @@ const routes = function (User) {
       // TODO: Use callback on parse and onParts.
       form.parse(req);
     })
-    .get((req, res) => {
+    .get((req, res) => { // For download file
+      // localhost:8000/api/files?userId=5888fbbeca10712d7c18e672&fileId=588ba74ac05ac5126ce1d0f0
+      // TODO: Move to middleware. 
       let query = {};
 
-      if(req.query.fileId) {
-        query.files._id = req.query.fileId;
+      if(req.query.userId && req.query.fileId) {
+        query = {
+          id: req.query.userId,
+          file: { id: req.query.fileId }
+        }
       }
-
-      User.find(query, function(err, users) {
-        if(err) {
+     
+      User.findById(query.id, function (err, user){
+        if (err) {
           res.status(500).send(err);
         } else {
-          res.json(users);
+          const file = user.files.id(query.file.id); //.id(req.file.id);
+          res.json(file);
         }
       });
     });
