@@ -1,17 +1,23 @@
 import React from 'react';
 
+/*
+  onClick={onUpload(inputRef)} 
+  onClick={(event) => onUpload(inputRef)(event)}
+*/
 const InputFile = ({onChangeFileSelection, onClickFileSelection, onUpload}) => {
+  let inputRef = null;
   return (
     <div>
       <input
        type="file"
        name="uploadfile"
        onChange={onChangeFileSelection}
-       onClick={onClickFileSelection}/>
+       onClick={onClickFileSelection}
+       ref={(input) => { inputRef = input.name }}/>
      <input
       type="button"
       value="Subir Fichero"
-      onClick={onUpload} />
+      onClick={(evt) => onUpload(evt, inputRef)} />
     </div>
   );
 };

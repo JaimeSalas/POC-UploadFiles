@@ -26,8 +26,12 @@ class App extends Component {
       uploadPercentage: ''
     };
   }
+  // onUpload(inputRef)
+  // testOnUpload(test) {
+  //   return (evt) => {}
+  // } 
 
-  onUpload(evt) {
+  onUpload(evt, test) {
     evt.stopPropagation();
     this.setState({uploadingFile:true});
     FileService.uploadFile(this.state.file, this.onUploadProgress)
