@@ -23,7 +23,7 @@ gulp.task('tests', function (){
     When we get into our app.js I can do a process.env and pull in our environement,
     so it'll either be prod, dev or test and that will be governed by Gulp execution.
   */
-  env({vars: {ENV:'gulp'}});
+  env({vars: {ENV:'Test'}});
   gulp.src('Tests/*.js', { read: false })
     .pipe(gulpMocha({reporter: 'nyan'}));
 });

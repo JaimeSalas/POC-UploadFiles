@@ -19,6 +19,7 @@ mongoose.Promise = bluebird;
 
 if (process.env.ENV === 'Test') {
   db = mongoose.connect('mongodb://localhost/userAPI_test'); // Our database is going to connect here in tests environment
+  //console.log(db);
 } else {
   db = mongoose.connect('mongodb://localhost/userAPI');
 }
