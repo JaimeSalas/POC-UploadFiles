@@ -10,8 +10,23 @@
 
 <body>
   <h1>File Upload Vanilla JS</h1>
-  <input type="file" id="uploadfile" name="uploadfile" />
-  <input type="button" value="upload" id="uploadButton" />
+  <table id="users">
+    <thead>
+      <th>First Name</th>
+      <th>Last Name</th>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <div class="user-info">
+    <label>Current User:</label>
+    <span id="current-user-name"></span>
+  </div>
+  <div class="file-upload">
+    <input type="file" id="uploadfile" name="uploadfile" />
+    <input type="button" value="upload" id="uploadButton" />
+  </div>
+  
   <!-- TODO: input type  upload file -->
   <!-- TODO: styles for input type file -->
   <!-- <div clas="container-add-book">

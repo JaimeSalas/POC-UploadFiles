@@ -2,7 +2,7 @@
   api.fileService = (function () {
     const baseUrl = `http://localhost:8000/api/files`;
     //const baseUrl = `http://localhost:8000/upload`;
-    const uploadFile = function uploadFile(files) {
+    const uploadFile = function uploadFile(files, userId) {
       // input type="file", pass as well related user.
       // https://developer.mozilla.org/es/docs/XMLHttpRequest/Using_XMLHttpRequest
       const formData = new FormData();
@@ -11,7 +11,7 @@
       // formidable do not use extra headers.
 
       // TODO: Use user id. Select from table.
-      formData.append('userId', '5888fbc8ca10712d7c18e674'); // Ensure that userId exists on database.
+      formData.append('userId', userId); // Ensure that userId exists on database.
       let promise = new Promise(function(resolve, reject) {
         const client = new XMLHttpRequest();
         client.onerror = (event) => {

@@ -1,39 +1,29 @@
 document.addEventListener('DOMContentLoaded', (event) => {
   // Retrieve users
-  let users;
+  let users, userId;
 
   api.userService.getUsers()
     .then(result => {
-      users = JSON.parse(result)
-        .map(r => getUserClientEntity(r));
+      users = JSON.parse(result);
+      userinterface.uiBuilder.populateUsersTable(users);
     })
     .catch(err => console.log(err));
   
-  // TODO: Move to a service
-  const getUserClientEntity = (serverEntity) => {
-    const userFiles = serverEntity.files.map(f => {
-      let file = app.File();
-      file.name = f.name;
-      file.id = f._id;
-      file.size = f.size;
+  const tableUsers = document.getElementById('users');
+  tableUsers.addEventListener('click', (event) => {
+    event.stopPropagation();
+    userId = readUserId(event.target.parentElement);
+    userinterface.uiBuilder.fillElementText('current-user-name',readUser(event.target.parentElement));
+    // TODO: Populate user files
+  });
 
-      return file;
-    });
+  const readUserId = (row) => row.getAttribute('data-user-id');
+  const readUser = (row) => `${row.childNodes[1].innerText}, ${row.childNodes[0].innerText}`;
 
-    const user = app.User();
-    user.name = serverEntity.name;
-    user.lastName =  serverEntity.lastName; 
-    user.id = serverEntity._id;
-    user.files = userFiles;
-
-    return user;
-  };
-  // TODO: Display users on table. Select 
   const uploadButton = document.getElementById('uploadButton');
   uploadButton.addEventListener('click', (event) => {
     const filesInput = document.getElementById('uploadfile');
-    // console.log(file.files);
-    api.fileService.uploadFile(filesInput.files)
+    api.fileService.uploadFile(filesInput.files, userId)
       .then(result => {
         console.log(result);
       }).catch(err => {

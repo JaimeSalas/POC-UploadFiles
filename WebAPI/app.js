@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 var db;
 mongoose.Promise = bluebird;
 
-if(process.env.ENV === 'Test') {
+if (process.env.ENV === 'Test') {
   db = mongoose.connect('mongodb://localhost/userAPI_test'); // Our database is going to connect here in tests environment
 } else {
   db = mongoose.connect('mongodb://localhost/userAPI');

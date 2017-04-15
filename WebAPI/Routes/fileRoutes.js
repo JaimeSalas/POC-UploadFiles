@@ -6,6 +6,7 @@ const express = require('express'),
 
 // TODO: Discuss use upload/download on uri
 // TODO: Delete File by _id
+// Chaining multiple promises: http://blog.revathskumar.com/2015/07/using-promises-with-mongoosejs.html
 /*
   To delete a single file, we have to pass two parameters: user._id
   and file._id. We have to create a query string that comes with 
@@ -85,7 +86,7 @@ const routes = function (User) {
     })
     .delete((req, res) => {  
       const query = getQueryParams(req);
-
+      // TODO: Try out -> http://blog.revathskumar.com/2015/07/using-promises-with-mongoosejs.html
       User.findById(query.id)
       .exec()
       .then(user => {
@@ -99,7 +100,7 @@ const routes = function (User) {
   return fileRouter;
 };
 
-// TODO: Move to middleware
+// TODO: Move to parsers
 // TODO: Create specific route???
 const getQueryParams = (req) => {
   let query = null;
