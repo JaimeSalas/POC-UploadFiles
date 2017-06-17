@@ -1,0 +1,19 @@
+{
+  "name": "aws_backets",
+  "version": "1.0.0",
+  "description": "Tutorial to getting started with AWS buckets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "AWS",
+    "S3",
+    "buckets"
+  ],
+  "author": "Jaime Salas",
+  "license": "ISC",
+  "devDependencies": {
+    "aws-sdk": "^2.72.0"
+  }
+}
