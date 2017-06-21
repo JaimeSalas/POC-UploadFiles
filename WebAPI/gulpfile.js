@@ -1,6 +1,7 @@
 const gulp = require('gulp'),
       nodemon = require('gulp-nodemon'),
       gulpMocha = require('gulp-mocha'),
+      batch = require('gulp-batch'),
       env = require('gulp-env'), // Let us manipulate the environment variables in Gulp, so that we can setup a test environment.
       supertest = require('supertest'); // This one allow us to make http calls
 
@@ -27,3 +28,9 @@ gulp.task('tests', function (){
   gulp.src('Tests/*.js', { read: false })
     .pipe(gulpMocha({reporter: 'nyan'}));
 });
+
+gulp.task('watch-test', () => (
+  gulp.watch(['Tests/*.js'], ['tests'])
+));
+
+gulp.task('devtest', ['tests', 'watch-test']);

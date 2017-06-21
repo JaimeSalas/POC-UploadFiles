@@ -65,4 +65,12 @@ describe('userController test', function() {
             res.send.calledOnce.should.equal(true);
         });
     });
+
+    describe('Get', () => {
+        it('should return users', () => {
+            const t = true;
+            t.should.equal(true);
+
+        });
+    });
 });
