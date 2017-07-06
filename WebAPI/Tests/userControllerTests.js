@@ -35,7 +35,7 @@ describe('userController test', function() {
                 status: sinon.spy(),
                 send: sinon.spy()
             }
-
+                
             const userController = UserController(User).post(req, res);
 
             res.status.calledWith(400).should.equal(true);

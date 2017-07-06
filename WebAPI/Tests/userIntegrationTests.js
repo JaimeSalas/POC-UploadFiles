@@ -1,4 +1,4 @@
-// NOTE: Take a look on this: http://www.marcusoft.net/2015/10/eaddrinuse-when-watching-tests-with-mocha-and-supertest.html
+//NOTE: Take a look on this: http://www.marcusoft.net/2015/10/eaddrinuse-when-watching-tests-with-mocha-and-supertest.html
 
 // const should = require('should'),
 //       request = require('supertest'),
